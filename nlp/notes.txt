@@ -1,0 +1,13 @@
+TOWARDS UNIVERSAL PARAPHRASTIC SENTENCE EMBEDDINGS - https://arxiv.org/pdf/1511.08198.pdf
+Task: Learn embeddings representations optimized for Textual similarity Tasks
+Approach: Apart from modeling on diverse textual similarity datasets, they use publicly available dataset for synonyms such as "PPDB" etc. to tune word representations. The paper release novel word-embeddings publicly which can be used for getting representative "sentence vector" in unsupervised manner. Their simpler model works better than LSTM based representations for some of the textual similarity datasets.
+Author page: https://www.cs.cmu.edu/~jwieting/
+
+
+Skip-Thought Vectors - https://arxiv.org/abs/1506.06726
+Tasks: unsupervised learning of a generic, distributed sentence encoder
+Approach: Similar analogy to skip-gram but rather than doing it on word-level, they work on sentence level i.e. Given a sentence, encode it and generate surrounding sentences during decoding phrase. Paper also describes way for getting representation for unknown token not seen during training time.
+Evaluation:  semantic relatedness, paraphrase detection, image-sentence ranking, question-type classification and 4 benchmark sentiment and subjectivity datasets
+Doubts:
+Pending: Read Paper
+Addtional Notes: https://gist.github.com/shagunsodhani/4a4eb32de8cabf21bda9a4ada15c46e8
