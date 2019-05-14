@@ -26,18 +26,18 @@ Extended normalization: instead of computing k-nearest neighbour over annotated 
 Idea: Jointly align N set of word vectors to a common target space (ex. en) i.e. Learning mapping jointly from more than one language embedding space to a common (en, referred as pivot) space. Learning jointly improve indirect word translation greatly.
 -> Assignment matrix P (n*n matrix), and mapping Q (d*d matrix), X&Y (n*d matrices). P(i) and Q(i) is language specific. Q(i) is mapping from ith language to pivot
 -> solving Q while P is fixed: Orthogonal procrustes problem: O(d^3), solving P (assignment matrix) while Q is fixed: hungarian algorithm: O(n^3) : very expensive
-Regularizing with -ve entropy leads to Sinkhorn algorithm: O(n^2). 
--> A good initialization of P helps in finding local minima. To find good initialization for P, they use entropic regularization of GW (Gromov-Wassertein) problem. This is used in recent papers too. 
--> Novelity: consider all pairs of languages (i,j) rather than only (i, pivot). This notion improves indirect word translation while maintaining similar peroformance on direct translation to pivot. Indirect word translation: src -> en -> tgt. 
+Regularizing with -ve entropy leads to Sinkhorn algorithm: O(n^2).
+-> A good initialization of P helps in finding local minima. To find good initialization for P, they use entropic regularization of GW (Gromov-Wassertein) problem. This is used in recent papers too.
+-> Novelity: consider all pairs of languages (i,j) rather than only (i, pivot). This notion improves indirect word translation while maintaining similar peroformance on direct translation to pivot. Indirect word translation: src -> en -> tgt.
 -> In loss function: use of alpha(i,j) reflects (weight) improtance of alignment quality between language i and j; alpha(i,j) = N if either of i or j is pivot else 1
 -> model loss function: wieghted (alpha) RCSCL loss with multialignment objective (i,j); training: for first few epochs, l2 loss is optimized and then switch to RCSCL loss. for l2 loss use Sinkhorn algorithm. Sinkhorn is an OT algorithm.
 -> diff batch_size and lr for initial and later epochs. Initially use Sinkhorn algorithm for assignment matrix and then for efficiency, take max over each row.
-dataste: MUSE test dataset, learning joint alignment over 11 languages, 
--> Results: 
+dataste: MUSE test dataset, learning joint alignment over 11 languages,
+-> Results:
 1. Triplet alignment: presence of another language doesn't help in case of direct translation. Interestingly, presence of another language improves performancefor indirect translation compared to without another language presence for direct translation.
 2. Multilingual Alignment: For direct translation, it preserves the performance (for unsupervised) and improve performance by ~4% for indirect translation. Total 11 languges are considered for this task which are from same as well as different family. Some languages are distant from English.
 
-Observation: 
+Observation:
 -> uniform weighting (alpha) improves indirect translation at cost of reduced performance on direct translation. Paper doesn't use uniform weighting.
 -> as number of languages increases (6 to 11), performance only reduces by 1%, so this can be scaled to multple languages. Not sure for hundreds on languages though.
 -> Model training is quite fast and can be done on CPU.
@@ -49,5 +49,5 @@ Doubts: what is the training data? Are any bilingual dictionaries being used dur
 
 
 
-	
+
 
